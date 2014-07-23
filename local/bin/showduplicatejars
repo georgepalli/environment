@@ -1,0 +1,9 @@
+#!/bin/bash
+
+DIR=$1
+
+if [[ "x$DIR" == "x" ]] ; then
+  DIR=".";
+fi
+
+ls $DIR | sed -e s/.jar//  | sed -e s/-[^-]*$// | sort | uniq -c  | awk '$1 !~/1/'

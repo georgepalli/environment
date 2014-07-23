@@ -1,0 +1,72 @@
+# File .alias
+# alias definitions
+# Owner: George Abraham
+
+# Common command aliases
+alias mail=mailx
+
+
+if [ $m_ARCH = "SunOS" ]; then
+    alias ls='ls -FCr'
+elif [ $m_ARCH = "Linux" ]; then
+    alias ls='ls -FCr --color'
+elif [ $m_ARCH = "Darwin" ]; then
+    alias ls='ls -G'
+    alias dates='date -r'
+fi
+
+
+
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias lt='ls -FCrt'
+alias vim='vim -X'
+alias vi='vim'
+alias back='cd $OLDPWD'
+alias du='du -k'
+alias df='df -k'
+alias scls='screen -ls'
+alias ddate="date '+%a %b %d %Y'"
+alias dddate="date '+%b %d %Y'"
+alias svi='set -o vi'
+alias sem='set -o emacs'
+alias c='clear'
+alias h='history'
+alias mysql='mysql --prompt="(\u @ `hostname`) [\d]> "'
+alias grep='grep --color=ALWAYS'
+alias foo='vim /tmp/foo'
+
+#Because I type like a monkey
+alias guznip='gunzip'
+alias vmi='vim'
+alias ivm='vim'
+alias gmaek='gmake'
+alias gamek='gmake'
+alias gamke='gmake'
+alias bakc='back'
+
+# OS Specific aliases
+case ${m_ARCH} in
+SunOS*)
+	if [ "$TERM" = "xterm" ]; then
+		alias rs=`eval resize`
+	fi
+	;;
+Linux)
+#	alias webster='rsh udc webster'
+esac
+
+
+case ${m_ARCH} in 
+Darwin*)
+  alias git='/usr/local/git/bin/git'
+  alias tar='/usr/bin/tar'
+esac
+
+# Open some files
+alias kh="vim \-u /dev/null ~/.ssh/known_hosts"
+
+
+#alias prnt='a2ps -2 --center-title="`date`" --line-numbers=1 --pretty-print --printer=lp1facil --sides=2'
+

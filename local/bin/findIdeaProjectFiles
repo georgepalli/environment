@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Simple script to remove IntelliJ Project Files
+
+DIR="$1";
+
+if [[ "x${DIR}" == "x" ]]; then
+  DIR=".";
+fi
+
+
+
+    find ${DIR} -type f \( -name "*.iml" -o -name "*.ipr"  -o -name "*.iws" \)
+    find ${DIR} -type d -name ".idea" 
+
+

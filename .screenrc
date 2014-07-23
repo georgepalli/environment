@@ -1,0 +1,106 @@
+# File: .screenrc
+# Screen rc file - config options
+# George Abraham
+
+
+
+#Linux
+#bind b eval "writebuf" "exec sh -c 'xsel --clipboard --input < /tmp/screen-exchange'"
+# Mac
+bind b eval "writebuf" "exec sh -c 'pbcopy < /tmp/screen-exchange'"
+
+
+# no audible bell, just visual
+vbell off
+vbell_msg "Ding Ding"
+
+# detach on hangup
+autodetach on
+
+# don't display copyright page
+startup_message off
+
+# scroll back
+defscrollback 1000
+
+# setup the caption
+hardstatus alwayslastline '%{gk} [ %H ] [ %{G}%t %{g}][%= %{wk}%?%-Lw%?%{=b kR}(%{w}%n %t%?(%u)%?%{=b kR})%{= kw}%?%+Lw%?%?%= %{g}][%{Y}%l%{g}]%{=b C}[ %m/%d %c:%s ]%{W}'
+# Activity
+activity    "activity in %n (%t) [%w:%s]~"
+bind * activity "activity in %n (%t) [%w:%s]"
+
+################
+# keybindings
+################
+
+### remove some key bindings
+bind .
+bind ^\
+bind \\
+bind ''
+#escape ^ff
+escape ^jj
+bind ^a
+
+# change the command combination to be Ctrl+w
+# Emacs mode -Ctrl+a is start of line 
+bindkey "^w" command
+
+
+
+bind P paste .
+#bind S screen -t 'NEWS' 10 slrn -n -C 
+bind V screen -t 'vim' vim
+
+# PuTTY arrow key bindings 
+# Ctrl + Right = Next
+bindkey "[1;5C" next
+# Ctrl + Left = Prev
+bindkey "[1;5D" prev
+# Ctrl + Up gives new bash screen
+#bindkey "[A" screen -T dtterm -t BASH bash
+
+
+
+# terminfo and termcap for nice 256 color terminal
+attrcolor b ".I" # allow bold colors
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm' # AB=background, AF=foreground
+defbce "on" # erase background with current bg color
+#term screen-256color
+
+
+##initial screen windows
+#screen 9
+#select 9
+#exec screen-ssh-agent
+#exec true
+#source $HOME/.ssh/screen_agent
+#
+
+
+screen -t bash
+screen -t bash
+screen -t bash
+screen -t bash
+screen -t bash
+
+#setenv pause1
+#screen 20 ssh-agent -a $SSH_AUTH_SOCK $SHELL # Bind agent to my socket
+#setenv pause2
+#screen 21 ssh-add
+#end of screenrc
+
+
+
+# Set socket to .screen-ssh-agent
+#setenv SSH_AUTH_SOCK $HOME/.${HOST}-screen-ssh-agent
+#setenv pause0
+
+#unsetenv SSH_AUTH_SOCK
+#setenv SSH_AUTH_SOCK $HOME/.screen/ssh-auth-sock.$HOSTNAME
+#
+
+
+#hardstatus alwayslastline '%{gk}[ %{G}%H %{g}][%= %{wk}%?%-Lw%?%{=b kR}(%{w}%n %t%?(%u)%?%{=b kR})%{= kw}%?%+Lw%?%?%= %{g}][%{Y}%l%{g}]%{=b C}[ %m/%d %c:%s ]%{W}'
+#hardstatus alwayslastline "%{-b gk}%-w%{+b kg}%50>%n %t%{-b gk}%+w%<"
+#hardstatus alwayslastline '%{gk}[ %{G}%H %{g}][%= %{wk}%?%-Lw%?%{=b kR}(%{w}%n* %t%?(%u)%?%{=b kR})%{= kw}%?%+Lw%?%?%= %{g}][%{Y}%l%{g}]%{=b C}[ %m/%d %c:%s ]%{W}'

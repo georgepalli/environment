@@ -1,0 +1,14 @@
+#!/bin/bash
+
+CONFIRM=$1
+
+if [[ "x${CONFIRM}" != "xYES" ]] ;
+then
+  echo "Usage: $0 YES"
+else
+  set -x
+  sudo rm /usr/local/bin/sshfs
+  sudo rm /usr/local/share/man/man1/sshfs.1
+  pkgutil --forget com.github.osxfuse.pkg.SSHFS
+fi
+#https://github.com/osxfuse/osxfuse/wiki/SSHFS

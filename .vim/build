@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cd ~
+tar cvzf vimrc.tar.gz .vimrc .vim
+mv vimrc.tar.gz ~/.vim/

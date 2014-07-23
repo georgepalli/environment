@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# Simple script to remove GRADLE and ivy caches
+
+RUN=$1;
+
+
+if [[ "x${RUN}" == "x" ]] ; 
+then
+  VERSION="n"
+fi;
+
+
+
+
+DIRS=();
+
+if [[ "x$WORKSPACE" != "x" ]] ; then
+  DIRS+=("$WORKSPACE/.ivy2.cache");
+  DIRS+=("$WORKSPACE/.gradle");
+  DIRS+=("$HOME/.gradle");
+  DIRS+=("$WORKSPACE/ivy2-local");
+  DIRS+=("$HOME/ivy2-local");
+fi
+
+
+if [[ ${RUN} == "y" || ${RUN} == "Y" ]]; 
+then
+  set -x;
+  for i in ${DIRS[@]}
+  do
+    rm -rf $i/*; 
+  done;
+else
+  echo "#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#";
+  echo "Run '$0 y' to run the following commands";
+  echo "#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#";
+  echo
+  for i in "${DIRS[@]}"
+  do
+    echo "rm -rf $i/*"; 
+  done;
+fi

@@ -1,0 +1,14 @@
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~# 
+# FUNCTIONS
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~# 
+
+cdiff () { command diff -u "$@" | perl -ne 'use Term::ANSIColor qw(:constants); m/^([-+])/; print RED if($1 eq "-"); print GREEN if ($1 eq "+"); print $_,RESET;' | less -R ;}
+
+awk2 () { command   awk '{print $2}';}
+
+psg() { command  ps aux | grep "$*" | grep -v grep;}
+
+lspof() { command lsof -i tcp:$*;}
+
+p4() { if [ "$1" = "help" ] ; then command p4 "$@" | less -FX ; else command p4 "$@" ; fi }
+
