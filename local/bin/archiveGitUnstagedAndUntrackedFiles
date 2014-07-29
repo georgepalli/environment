@@ -1,0 +1,41 @@
+#!/bin/bash
+
+TARGET_DIR=$1;
+CONFIRMATION=$2;
+
+function usage(){
+  echo "USAGE:
+      $0 TARGET_DIR [CONFIRMATION]
+        - CONFIRMATION : y | n"
+  
+}
+
+TOP_LEVEL=`git rev-parse --show-toplevel`
+
+if [[ ! -e ${TARGET_DIR} ]] ; then
+  echo "Target Directory : '${TARGET_DIR}' not specified or doesn't exist";
+  usage;
+  exit;
+fi
+
+if [[ "x${CONFIRMATION}" == "x" ]] ; then
+  CONFIRMATION="n";
+  usage;
+  echo
+  echo "Will run the following commands if CONFIRMATION is y";
+fi
+
+for i in `git status --porcelain | awk '{print $2 "\n" $4}' | awk '/^$/{next}  $1'`;  do   
+  FILE="$TOP_LEVEL/$i";
+  if [[ -e $FILE ]] ; then 
+    if [[ $CONFIRMATION == "y" ]] ; then
+      set -x
+      rsync -R $FILE $TARGET_DIR; 
+      set +x
+    else
+      echo rsync -R $FILE $TARGET_DIR; 
+    fi
+  else
+    echo "File not found '$FILE'";
+  fi ; 
+done
