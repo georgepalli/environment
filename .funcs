@@ -12,3 +12,7 @@ lspof() { command lsof -i tcp:$*;}
 
 p4() { if [ "$1" = "help" ] ; then command p4 "$@" | less -FX ; else command p4 "$@" ; fi }
 
+di() { command ./gradlew dependencyInsight --dependency "$@"  2>&1 | tee dep.log ;}
+
+randomLine() { command head -$((${RANDOM} % `wc -l < "$@"` + 1)) "$@" | tail -1 ;}
+

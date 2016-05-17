@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# Simple script to remove IntelliJ Project Files
+
+CONFIRM="$1";
+VERSION="$2";
+
+if [[ "x${VERSION}" == "x" ]] ; 
+then
+  VERSION=13
+fi;
+
+
+if [[ "x${CONFIRM}" == "x" ]] ;
+then
+  CONFIRM="n";
+fi
+
+
+export m_ARCH=`uname -s`
+
+
+if [[ $m_ARCH == "Darwin" ]] ;
+then
+
+  if [[ $CONFIRM == "Y" || $CONFIRM == "y" ]] ;
+  then
+    echo "Removing intellij cache files on $m_ARCH";
+    set -x
+    rm -rf ~/Library/Caches/IntelliJIdea${VERSION}/*
+  else
+    echo "---------------------------------------------------------------------------------------------------------------------"
+    echo "Will run the following commands when invoked as '$0 y'"
+    echo "To see a dry run to nuke caches of another Intellij Version (e.g. 12)  run '$0 n 12'"
+    echo "To nuke caches of another Intellij Version (e.g. 12)  run '$0 y 12'"
+    echo "---------------------------------------------------------------------------------------------------------------------"
+    echo "rm -rf ~/Library/Caches/IntelliJIdea${VERSION}/*"
+  fi
+else
+  echo "Not supported on OS $m_ARCH";
+fi
+
+
